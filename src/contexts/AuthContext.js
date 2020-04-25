@@ -1,13 +1,21 @@
 import React, { Component, createContext} from 'react';
+import ThemeToggle from '../components/ThemeToggle';
 
 export const AuthContext = createContext();
 
 class AuthContextProvider extends Component {
   state = { 
-    isAuthenticated
-   }
+    isAuthenticated: false
+  }
+  toggleAuth = () => {
+    this.setState({ isAuthenticated: !this.isAuthenticated })
+  }
   render() { 
-    return (  );
+    return ( 
+      <AuthContext.Provider value={{...this.state, toggleAuth: this.toggleAuth}}>
+        {this.props.children}
+      </AuthContext.Provider>
+     );
   }
 }
  
